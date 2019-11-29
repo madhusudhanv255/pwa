@@ -1,0 +1,32 @@
+<div class="modal-header">
+    <h6 class="modal-title" id="modal-basic-title">Book Meeting Room</h6>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form name="meetingForm" novalidate>
+        <div class="row">
+            <div class="col">
+                <div class="col margin-bottom-10">
+                    <label>Subject</label>
+                    <input type="text" class="form-control" name="meetingSubject" ng-model="meeting.subject"
+                        placeholder="Subject" id="meetingSubject" required />
+                </div>
+                <div class="col">
+                    <label>Attendees</label>
+                    <input type="text" class="form-control" name="attendee" ng-model="meeting.attendees"
+                        placeholder="example.accionlabs.com" id="attendee" required />
+                </div>
+            </div>
+            <div class="col">
+                <full-calendar #calendar defaultView="timeGridDay" [plugins]="calendarPlugins" [events]="eventSource"
+                    (dateClick)="handleDateClick($event)" deepChangeDetection="true">
+                </full-calendar>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="modal.close('Save click')">Save</button>
+</div>

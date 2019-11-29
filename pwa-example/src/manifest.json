@@ -1,0 +1,17 @@
+{
+    "short_name": "PWA",
+    "name": "Schedule Accion Room",
+    "theme-color": "#1976d2",
+    "background-color": "#fafafa",
+    "display": "standalone",
+    "icons": [
+        {
+            "src": "assets/icon/icon-72*72.png",
+            "type": "image/png",
+            "sizes": "72x72"
+        }
+    ],
+    "start_url": "/",
+    "background_color": "#3367D6",
+    "scope": "/",
+}
