@@ -16,7 +16,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 export class MeetingRoomComponent implements OnInit {
     public calendarPlugins: any;
     closeResult: any;
-    constructor(private modalService: NgbModal) {
+    constructor() {
 
         this.calendarPlugins = [dayGridPlugin, interactionPlugin];
     }
@@ -25,24 +25,24 @@ export class MeetingRoomComponent implements OnInit {
     }
 
     handleDateClick(arg) {
-        this.open();
+        //this.open();
     }
 
-    open() {
-        this.modalService.open(BookRoomModalComponent, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
-            this.closeResult = `Closed with: ${result}`;
-        }, (reason) => {
-            this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-        });
-    }
-    private getDismissReason(reason: any): string {
-        if (reason === ModalDismissReasons.ESC) {
-            return 'by pressing ESC';
-        } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-            return 'by clicking on a backdrop';
-        } else {
-            return `with: ${reason}`;
-        }
-    }
+    /*  open() {
+         this.modalService.open(BookRoomModalComponent, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+             this.closeResult = `Closed with: ${result}`;
+         }, (reason) => {
+             this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+         });
+     }
+     private getDismissReason(reason: any): string {
+         if (reason === ModalDismissReasons.ESC) {
+             return 'by pressing ESC';
+         } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+             return 'by clicking on a backdrop';
+         } else {
+             return `with: ${reason}`;
+         }
+     } */
 
 }
