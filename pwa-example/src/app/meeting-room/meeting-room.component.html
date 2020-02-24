@@ -12,33 +12,7 @@
 </div>
 
 <div class="content" role="main">
-    <div class="row padding-30">
-        <div class="col">
-            <label>Location</label>
-            <select class="form-control">
-                <option>JP Nagar</option>
-                <option>Whitefield</option>
-            </select>
-
-        </div>
-        <div class="col">
-
-            <label>Room</label>
-
-            <select class="form-control">
-                <option value="atlanta">Atlanta</option>
-                <option value="eventsroom">Events Room</option>
-                <option value="london">London</option>
-                <option value="pittsburg">PittsBurg</option>
-                <option value="santaclara">Santa Clara</option>
-                <option value="singapore">Singapore</option>
-            </select>
-
-        </div>
-    </div>
-    <full-calendar #monthCalendar defaultView="dayGridMonth" [plugins]="calendarPlugins" [weekends]="false" [events]="[
-    { title: 'event 1', date: '2019-11-28' },
-    { title: 'event 2', date: '2019-04-02' }]" (dateClick)="handleDateClick($event)"></full-calendar>
+    <full-calendar #monthCalendar defaultView="dayGridMonth" [plugins]="calendarPlugins" [weekends]="false" [events]="meetingSource" (dateClick)="handleDateClick($event)"></full-calendar>
 
 
 

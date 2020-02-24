@@ -1,13 +1,33 @@
 <div class="modal-header">
     <h6 class="modal-title" id="modal-basic-title">Book Meeting Room</h6>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
 <div class="modal-body">
-    <form name="meetingForm" novalidate>
+  
         <div class="row">
             <div class="col">
+                <div class="col margin-bottom-10">
+                    <label>Location</label>
+                    <select class="form-control"[(ngModel)]="meetingLocation"  (change)="selectLocation(meetingLocation)">
+                    <option [value]="location.id" *ngFor="let location of dropDownValues">{{location.name}}</option>
+                    </select>
+                </div>
+                
+                <div class="col margin-bottom-10">
+                        <label>Rooms</label>
+                        <select class="form-control"[(ngModel)]="meetingRoom"  (change)="selectLocation(meetingLocation)">
+                        <option [value]="room.id" *ngFor="let room of meetingRooms">{{room.name}}</option>
+                        </select>
+                    </div>
+                    
+                <!-- <div class="col margin-bottom-10">
+                        <label>Meeting Room</label>
+                        <select class="form-control" formControlName="countryControl">
+                        <option [value]="location.id" *ngFor="let room of meetingRooms">{{room}}</option>
+                        </select>
+                    </div> -->
                 <div class="col margin-bottom-10">
                     <label>Subject</label>
                     <input type="text" class="form-control" name="meetingSubject" ng-model="meeting.subject"
@@ -25,8 +45,7 @@
                 </full-calendar>
             </div>
         </div>
-    </form>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-primary" (click)="modal.close('Save click')">Save</button>
+    <button type="button" class="btn btn-primary" (click)="bookMeetingRoom()">Save</button>
 </div>

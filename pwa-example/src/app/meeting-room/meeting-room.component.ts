@@ -5,6 +5,7 @@ import { NgbActiveModal, NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-
 import { BookRoomModalComponent } from './book-room-modal/book-room-modal.component';
 
 import interactionPlugin from '@fullcalendar/interaction';
+import { MeetingService } from '../meeting.service';
 
 
 @Component({
@@ -16,8 +17,9 @@ import interactionPlugin from '@fullcalendar/interaction';
 export class MeetingRoomComponent implements OnInit {
     public calendarPlugins: any;
     closeResult: any;
-    constructor() {
-
+    meetingSource:Array<any>=[];
+    constructor(private meetingService: MeetingService,private modalService:NgbModal) {
+        this.getMeetings();
         this.calendarPlugins = [dayGridPlugin, interactionPlugin];
     }
 
@@ -25,10 +27,20 @@ export class MeetingRoomComponent implements OnInit {
     }
 
     handleDateClick(arg) {
-        //this.open();
+        this.open();
     }
 
-    /*  open() {
+    getMeetings(){
+        var meetings=[];
+        this.meetingService.getCall('https://immense-escarpment-67247.herokuapp.com/api/v1/meetings.json').subscribe((result) => {
+            // This code will be executed when the HTTP call returns successfully 
+            meetings=this.meetingService.formatMeetings(result.meetings.array);
+            this.meetingSource=meetings;
+            
+        });
+    }
+    
+      open() {
          this.modalService.open(BookRoomModalComponent, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
              this.closeResult = `Closed with: ${result}`;
          }, (reason) => {
@@ -43,6 +55,6 @@ export class MeetingRoomComponent implements OnInit {
          } else {
              return `with: ${reason}`;
          }
-     } */
+     } 
 
 }

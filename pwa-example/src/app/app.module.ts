@@ -9,6 +9,9 @@ import { MeetingRoomComponent } from './meeting-room/meeting-room.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { BookRoomModalComponent } from './meeting-room/book-room-modal/book-room-modal.component'; // for FullCalendar!
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     entryComponents: [BookRoomModalComponent],
@@ -21,8 +24,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         BrowserModule,
         AppRoutingModule,
         FullCalendarModule,
+        HttpClientModule,
         NgbModule,
-        ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+        FormsModule,
+        ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+        BrowserAnimationsModule
     ],
     providers: [],
     bootstrap: [AppComponent]
