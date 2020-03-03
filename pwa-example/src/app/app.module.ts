@@ -12,6 +12,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
     entryComponents: [BookRoomModalComponent],
@@ -19,6 +20,7 @@ import { FormsModule } from '@angular/forms';
         AppComponent,
         MeetingRoomComponent,
         BookRoomModalComponent,
+        LoginComponent,
     ],
     imports: [
         BrowserModule,

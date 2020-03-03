@@ -1,0 +1,43 @@
+<div class="center">
+    <div class="text-center margin-top-20-pct display-inline-flex">
+        <div class="width-50-pct">
+            <img src="../assets/meeting-schedule.jpg" width="300px" />
+        </div>
+        <form #loginForm="ngForm" novalidate class="width-50-pct">
+            <span class="form-title margin-bottom-20">
+                Account Login
+            </span>
+
+            <div class="margin-bottom-20">
+                <input class="border-gray padding-5" [(ngModel)]="email" type="email" name="email"
+                    placeholder="Username" required>
+            </div>
+            <div class="margin-bottom-20">
+                <input class="border-gray padding-5" type="password" name="password" [(ngModel)]="password"
+                    placeholder="Password" required>
+            </div>
+
+            <div>
+                <button class="form-btn" (click)="submitLogin()">
+                    Sign in
+                </button>
+            </div>
+
+            <!-- <div class="w-full p-t-27 p-b-239">
+                <span class="txt1">
+                    Forgot
+                </span>
+
+                <a href="#" class="txt2">
+                    User name / password?
+                </a>
+            </div>
+
+            <div class="w-full">
+                <a href="#" class="txt3">
+                    Sign Up
+                </a>
+            </div> -->
+        </form>
+    </div>
+</div>
