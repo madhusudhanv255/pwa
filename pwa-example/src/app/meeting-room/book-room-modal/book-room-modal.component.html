@@ -35,7 +35,7 @@
                 </div>
                 <div class="col">
                     <label>Attendees</label>
-                    <input type="text" class="form-control" name="attendee" ng-model="meeting.attendees"
+                    <input type="text" class="form-control" name="attendee" [ngbTypeahead]="search" ng-model="meeting.attendees"
                         placeholder="example.accionlabs.com" id="attendee" required />
                 </div>
             </div>

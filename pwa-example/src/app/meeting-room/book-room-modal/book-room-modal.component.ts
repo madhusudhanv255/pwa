@@ -6,12 +6,22 @@ import interactionPlugin from '@fullcalendar/interaction';
 import { FullCalendarComponent } from '@fullcalendar/angular';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { MeetingService } from 'src/app/meeting.service';
-
+import {Observable} from 'rxjs';
+import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
+const states = ['Alabama', 'Alaska', 'American Samoa', 'Arizona', 'Arkansas', 'California', 'Colorado',
+  'Connecticut', 'Delaware', 'District Of Columbia', 'Federated States Of Micronesia', 'Florida', 'Georgia',
+  'Guam', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine',
+  'Marshall Islands', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana',
+  'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
+  'Northern Mariana Islands', 'Ohio', 'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico', 'Rhode Island',
+  'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virgin Islands', 'Virginia',
+  'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
 @Component({
     selector: 'app-book-room-modal',
     templateUrl: './book-room-modal.component.html',
     styleUrls: ['./book-room-modal.component.css']
 })
+
 export class BookRoomModalComponent implements OnInit {
     calendarPlugins: any;
     eventSource:Array<any>=[];
@@ -20,11 +30,20 @@ export class BookRoomModalComponent implements OnInit {
     counter = 1;
     meetingLocation:any;
     meetingRooms:Array<any>=[];
+    public model: any;
+
     @ViewChild('calendar', { static: false }) calendarComponent: FullCalendarComponent;
 
     calendarEvents = [
         { title: 'event 1', date: '2019-04-01' }
     ];
+    search = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      map(term => term.length < 2 ? []
+        : states.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
+    )
 
     constructor(public activeModal: NgbActiveModal,private meetingService:MeetingService) {
       
@@ -103,13 +122,38 @@ export class BookRoomModalComponent implements OnInit {
         var reqObj={
             "meeting":
             {
-                "description": "nikitha.rokhade@accionlabs.com",
+              "description": "nikitha.rokhade@accionlabs.com",
               "room_id": 1,
-              "start_time": "2020-02-09T14:27:42",
-              "end_time": "2020-02-09T15:27:42"
+              "start_time": "2020-03-09T14:27:42",
+              "end_time": "2020-03-09T15:27:42"
+            },
+            "users":
+            {
+            "attendees":
+            [
+              {"id":"37"},
+              {
+              "department": "Development",
+              "role": "Developer",
+              "emp_id": "1123",
+              "first_name": "prabu",
+              "last_name": "Gnanasekar",
+              "project": "Owl",
+              "email": "madhu@accionlabs.com"
+            },
+              {
+              "department": "Development",
+              "role": "Developer",
+              "emp_id": "2012",
+              "first_name": "prabu",
+              "last_name": "Gnanasekar",
+              "project": "Owl",
+              "email": "nikitha@accionlabs.com"
             }
-          };
-        this.meetingService.postCall('https://immense-escarpment-67247.herokuapp.com/api/v1/meetings.json?access_token=0AO99n6xSBqoGx_7q4PGe4sD1-cdWrGvtOKBiYRBZmw',reqObj).subscribe((result) => {
+            ]
+          }
+          }
+        this.meetingService.postCall('https://immense-escarpment-67247.herokuapp.com/api/v1/meetings.json?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbXBsb3llZUlEIjoiMTEzNCIsImlhdCI6MTU4MzgxNjYwMn0.JvC17GerP1jtfspV1krvml2idY4cIg83_SbSkTqqSrI',reqObj).subscribe((result) => {
             // This code will be executed when the HTTP call returns successfully 
            // meetings=this.meetingService.formatMeetings(result.meetings.array);
            this.dropDownValues=result.locations.array;

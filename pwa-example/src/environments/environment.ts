@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://immense-escarpment-67247.herokuapp.com/api/v1',
+  apiUrl: 'http://intranet.accionlabs.com:8081/api/v1',
   zohoApiUrl: 'http://intranet.accionlabs.com:3005'
 };
 

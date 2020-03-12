@@ -27,7 +27,9 @@ export class MeetingRoomComponent implements OnInit {
     }
 
     handleDateClick(arg) {
-        this.open();
+
+        
+        this.open(arg);
     }
 
     getMeetings(){
@@ -40,8 +42,8 @@ export class MeetingRoomComponent implements OnInit {
         });
     }
     
-      open() {
-         this.modalService.open(BookRoomModalComponent, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      open(date) {
+         const modal=this.modalService.open(BookRoomModalComponent, { ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
              this.closeResult = `Closed with: ${result}`;
          }, (reason) => {
              this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;

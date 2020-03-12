@@ -52,7 +52,14 @@ export class LoginComponent implements OnInit {
 
 		this.apiService.postCall(AppRestEndPoint.SIGN_IN, loginValues).subscribe(data => {
 			if (data.token) {
-				this.router.navigate(['meeting']);
+				const authValues = {
+					"user": data.userData
+				};
+				let jwtToken=data.token.split(' ');
+				let url = AppRestEndPoint.AUTH_LOGIN+"?jwt="+jwtToken[1];
+				this.apiService.postCall(url,authValues).subscribe(data => {
+					this.router.navigate(['meeting']);
+				});
 			}
 		},
 			err => { console.log(err.message) })
